@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 class BinanceBot
 {
-    BinanceApiClientFactory factory;
-    BinanceApiRestClient client;
-    String input = "";
+    private BinanceApiClientFactory factory;
+    private BinanceApiRestClient client;
+    private String input = "";
 
     BinanceBot()
     {
@@ -24,7 +24,7 @@ class BinanceBot
         System.out.print("Bitte gebe ein Symbol ein!\n>");
         input = scanner.nextLine();
 
-        float currentPrice = Float.valueOf(client.get24HrPriceStatistics(input.toUpperCase()).getLastPrice());
+        float currentPrice = Float.parseFloat(client.get24HrPriceStatistics(input.toUpperCase()).getLastPrice());
         float simpleMovingAverage = calculateSimpleMovingAverage(input.toUpperCase(), 10);
         float a = currentPrice - simpleMovingAverage;
 
@@ -32,7 +32,7 @@ class BinanceBot
         {
             System.out.println("Upwards trend detected!");
         }
-        else if ((a / simpleMovingAverage) < 0)
+        else if ((a / simpleMovingAverage) < -0.02)
         {
             System.out.println("Downwards trend detected!");
         }
@@ -56,7 +56,7 @@ class BinanceBot
         {
             Candlestick candlestick = (Candlestick) obj;
 
-            toDivide += Float.valueOf(candlestick.getClose());
+            toDivide += Float.parseFloat(candlestick.getClose());
         }
 
         return toDivide / amount;
