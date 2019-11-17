@@ -8,6 +8,11 @@ import com.binance.api.client.domain.market.CandlestickInterval;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+    @author Marvin L.
+    (c) Marvin L., 2019. All rights reserved.
+ */
+
 class BinanceBot
 {
     private BinanceApiClientFactory factory;
