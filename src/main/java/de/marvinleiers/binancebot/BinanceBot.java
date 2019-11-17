@@ -25,15 +25,19 @@ class BinanceBot
         input = scanner.nextLine();
 
         float currentPrice = Float.valueOf(client.get24HrPriceStatistics(input.toUpperCase()).getLastPrice());
+        float simpleMovingAverage = calculateSimpleMovingAverage(input.toUpperCase(), 10);
+        float a = currentPrice - simpleMovingAverage;
 
-        if (currentPrice > calculateSimpleMovingAverage(input.toUpperCase(), 10))
+        if ((a / simpleMovingAverage) >= 0.01)
         {
-            System.out.println("Upwards trend detected! Current price: " + currentPrice + " MA: " + calculateSimpleMovingAverage(input.toUpperCase(), 10));
+            System.out.println("Upwards trend detected!");
         }
-        else
+        else if ((a / simpleMovingAverage) < 0)
         {
-            System.out.println("No upwards trend detected!");
+            System.out.println("Downwards trend detected!");
         }
+
+        System.out.println("Current price: " + currentPrice + " MA: " + simpleMovingAverage + " (" + (a / simpleMovingAverage) + ")");
     }
 
     private float calculateSimpleMovingAverage(String asset, int durationInHours)
