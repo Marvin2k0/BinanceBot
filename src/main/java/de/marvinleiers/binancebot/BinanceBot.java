@@ -28,13 +28,17 @@ class BinanceBot
         float simpleMovingAverage = calculateSimpleMovingAverage(input.toUpperCase(), 10);
         float a = currentPrice - simpleMovingAverage;
 
-        if ((a / simpleMovingAverage) >= 0.01)
+        if ((a / simpleMovingAverage) >= 0.03)
         {
             System.out.println("Upwards trend detected!");
         }
         else if ((a / simpleMovingAverage) < 0)
         {
             System.out.println("Downwards trend detected!");
+        }
+        else
+        {
+            System.out.println("Sideways trend detected!");
         }
 
         System.out.println("Current price: " + currentPrice + " MA: " + simpleMovingAverage + " (" + (a / simpleMovingAverage) + ")");
