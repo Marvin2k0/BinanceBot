@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
-    @author Marvin L.
+    @author Marvin L
     (c) Marvin L., 2019. All rights reserved.
  */
 
@@ -37,7 +37,7 @@ class BinanceBot
         {
             System.out.println("Upwards trend detected!");
         }
-        else if ((a / simpleMovingAverage) < -0.02)
+        else if ((a / simpleMovingAverage) < -0.016)
         {
             System.out.println("Downwards trend detected!");
         }
