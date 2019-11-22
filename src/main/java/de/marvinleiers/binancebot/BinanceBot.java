@@ -26,10 +26,10 @@ class BinanceBot
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Bitte gebe ein Symbol ein!\n>");
-        input = scanner.nextLine();
+        input = scanner.nextLine().toUpperCase();
 
         float currentPrice = Float.parseFloat(client.get24HrPriceStatistics(input.toUpperCase()).getLastPrice());
-        float simpleMovingAverage = Utils.movingAverage(input.toUpperCase(), CandlestickInterval.HOURLY, 15);
+        float simpleMovingAverage = Utils.movingAverage(input.toUpperCase(), CandlestickInterval.ONE_MINUTE, 500);
         float a = currentPrice - simpleMovingAverage;
 
         if ((a / simpleMovingAverage) >= 0.03)
@@ -44,6 +44,11 @@ class BinanceBot
         }
 
         System.out.println("Current price: " + currentPrice + " MA: " + simpleMovingAverage + " (" + (a / simpleMovingAverage) + ")");
+
+        for (float f : Utils.calculateResistances(input, CandlestickInterval.HOURLY, 100))
+        {
+            System.out.print(f + ", ");
+        }
     }
 
     public BinanceApiRestClient getClient()
