@@ -6,9 +6,9 @@ import com.binance.api.client.domain.market.CandlestickInterval;
 
 import java.util.Scanner;
 
-/*
+/**
     @author Marvin L
-    (c) Marvin L., 2019. All rights reserved.
+    (c) Marvin L., 2019 - 2021 All rights reserved.
  */
 
 class BinanceBot
@@ -44,11 +44,6 @@ class BinanceBot
         }
 
         System.out.println("Current price: " + currentPrice + " MA: " + simpleMovingAverage + " (" + (a / simpleMovingAverage) + ")");
-
-        for (float f : Utils.calculateResistances(input, CandlestickInterval.HOURLY, 100))
-        {
-            System.out.print(f + ", ");
-        }
     }
 
     public BinanceApiRestClient getClient()
